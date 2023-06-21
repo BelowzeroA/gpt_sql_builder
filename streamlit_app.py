@@ -111,52 +111,52 @@ def api_call_generator(user_message, api_call_placeholder):
 if "conversation_history" not in st.session_state:
     st.session_state.conversation_history = []
 
-# Add sidebar with dropdown
-assistant_options = ["API Call Generator", "AI Startups"]
-selected_option = st.sidebar.selectbox("Choose an assistant:", assistant_options)
+# # Add sidebar with dropdown
+# assistant_options = ["API Call Generator", "AI Startups"]
+# selected_option = st.sidebar.selectbox("Choose an assistant:", assistant_options)
 
-# Handle AI Startups option
-if selected_option == "AI Startups":
-
-    # Setup conversation history with session state
-    if "conservation_history" not in st.session_state:
-        st.session_state.conversation_history = [
-            {"role": "system", "content": """You are a helpul assistant that helps investors find relevant startups based solely on data (the context provided),
-            if the context is available, provide with each response provide a summary of the startup like an analyst, including what they do, 
-            where they're located, and what series of VC funding they've raised, and other relevant details an investor would care about. 
-            Start each list with company name with the profile URL wrapped around it.
-            If context isn't available, say 'Sorry I don't have that data. Right now I'm only trained on 5k AI startups.'.
-            """}
-        ]
-    st.title("SQL Assistant")
-    st.write(
-        "SQL Assistant is a GPT-4-enabled startup research assistant. Ask it for a list of startups, and it will retrieve relevant sources from site.")
-
-    # Add chatbot
-    chat_input = st.text_input("You:")
-    response_button = st.button("Send")
-    placeholder_response = st.empty()
-
-    if response_button:
-        chatbot_response(chat_input, placeholder_response)
-
+# # Handle AI Startups option
+# if selected_option == "AI Startups":
+#
+#     # Setup conversation history with session state
+#     if "conservation_history" not in st.session_state:
+#         st.session_state.conversation_history = [
+#             {"role": "system", "content": """You are a helpul assistant that helps investors find relevant startups based solely on data (the context provided),
+#             if the context is available, provide with each response provide a summary of the startup like an analyst, including what they do,
+#             where they're located, and what series of VC funding they've raised, and other relevant details an investor would care about.
+#             Start each list with company name with the profile URL wrapped around it.
+#             If context isn't available, say 'Sorry I don't have that data. Right now I'm only trained on 5k AI startups.'.
+#             """}
+#         ]
+#     st.title("SQL Assistant")
+#     st.write(
+#         "SQL Assistant is a GPT-4-enabled startup research assistant. Ask it for a list of startups, and it will retrieve relevant sources from site.")
+#
+#     # Add chatbot
+#     chat_input = st.text_input("You:")
+#     response_button = st.button("Send")
+#     placeholder_response = st.empty()
+#
+#     if response_button:
+#         chatbot_response(chat_input, placeholder_response)
+#
 # ...
 
 # Handle API Call Generator option
-elif selected_option == "API Call Generator":
-    # Handle API Call Generator option
-    st.title("API Call Generator")
-    st.write("Welcome to the API Call Generator. This assistant will help you create API calls based on your input.")
+# elif selected_option == "API Call Generator":
+# Handle API Call Generator option
+st.title("API Call Generator")
+st.write("Welcome to the API Call Generator. This assistant will help you create API calls based on your input.")
 
-    # Replace the print and input statements with Streamlit functions
-    st.write("Type your request and press 'Generate API Call' to get the API call.")
-    user_message = st.text_input("You:")
-    generate_button = st.button("Generate API Call")
-    api_call_placeholder = st.empty()
-    # placeholder_response = st.empty()
+# Replace the print and input statements with Streamlit functions
+st.write("Type your request and press 'Generate API Call' to get the API call.")
+user_message = st.text_input("You:")
+generate_button = st.button("Generate API Call")
+api_call_placeholder = st.empty()
+# placeholder_response = st.empty()
 
-    if generate_button:
-        api_call_generator(user_message, api_call_placeholder)
+if generate_button:
+    api_call_generator(user_message, api_call_placeholder)
 
 
 
