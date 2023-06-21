@@ -145,15 +145,14 @@ if "conversation_history" not in st.session_state:
 # Handle API Call Generator option
 # elif selected_option == "API Call Generator":
 # Handle API Call Generator option
-st.title("API Call Generator")
-st.write("Welcome to the API Call Generator. This assistant will help you create API calls based on your input.")
+st.title("GPT SQL Builder")
+st.write("Welcome to the GPT SQL Builder. This assistant will help you create SQL queries based on natural language.")
 
 # Replace the print and input statements with Streamlit functions
-st.write("Type your request and press 'Generate API Call' to get the API call.")
-user_message = st.text_input("You:")
-generate_button = st.button("Generate API Call")
+st.write("Type your query and press the button to get the SQL.")
+user_message = st.text_input("Query:")
+generate_button = st.button("Generate SQL")
 api_call_placeholder = st.empty()
-# placeholder_response = st.empty()
 
 if generate_button:
     api_call_generator(user_message, api_call_placeholder)
