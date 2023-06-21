@@ -1,16 +1,7 @@
 import openai
-import sys
-import tiktoken
 import streamlit as st
-import time
 
 openai.api_key = st.secrets["OPENAI_API_KEY"]
-
-
-# Set the max token limit
-MAX_MEMORY_TOKENS = 500
-
-import time
 
 
 def chatbot_response(chat_input, placeholder_response):
@@ -85,7 +76,7 @@ def api_call_generator(user_message, api_call_placeholder):
                     Now, use this context to write a new query based sole on the input. 
                     Also write a summary of the the API options that you've chosen i.e. the tags, industries, sub-industries, HQ region, and so on, before showing the API query. Write like a VC analyst.
 
-                    Lastly, can you create a URL based on the API query, here's an example of a final URL: https://app.dealroom.co/companies.startups/f/company_status/not_closed/company_type/not_service%20provider_government%20nonprofit/growth_stages/not_mature/has_website_url/anyof_yes/slug_locations/anyof_~united_states~/tags/not_outside%20tech/technologies/anyof_artificial%20intelligence/total_funding_max/anyof_10000000
+                    Lastly, can you create a URL based on the API query, here's an example of a final URL: https://site.com/companies.startups/f/company_status/not_closed/company_type/not_service%20provider_government%20nonprofit/growth_stages/not_mature/has_website_url/anyof_yes/slug_locations/anyof_~united_states~/tags/not_outside%20tech/technologies/anyof_artificial%20intelligence/total_funding_max/anyof_10000000
 
                     User input:
                     """
@@ -130,16 +121,16 @@ if selected_option == "AI Startups":
     # Setup conversation history with session state
     if "conservation_history" not in st.session_state:
         st.session_state.conversation_history = [
-            {"role": "system", "content": """You are a helpul assistant that helps investors find relevant startups based solely on Dealroom.co data (the context provided),
+            {"role": "system", "content": """You are a helpul assistant that helps investors find relevant startups based solely on data (the context provided),
             if the context is available, provide with each response provide a summary of the startup like an analyst, including what they do, 
             where they're located, and what series of VC funding they've raised, and other relevant details an investor would care about. 
-            Start each list with company name with the dealroom profile URL wrapped around it.
+            Start each list with company name with the profile URL wrapped around it.
             If context isn't available, say 'Sorry I don't have that data. Right now I'm only trained on 5k AI startups.'.
             """}
         ]
-    st.title("Dealroom Assistant")
+    st.title("SQL Assistant")
     st.write(
-        "Dealroom Assistant is a GPT-4-enabled startup research assistant. Ask it for a list of startups, and it will retrieve relevant sources from Dealroom.co.")
+        "SQL Assistant is a GPT-4-enabled startup research assistant. Ask it for a list of startups, and it will retrieve relevant sources from site.")
 
     # Add chatbot
     chat_input = st.text_input("You:")
