@@ -1,0 +1,13 @@
+There is some data stored in a Clickhouse database, and you need to answer to a natural language query:
+"[query]"
+
+On the previous step, you have created the following SQL:
+---
+[sql]
+---
+
+Which returned the following result:
+---
+[query_result]
+---
+Answer to the natural language query considering the result of the SQL query:

@@ -1,0 +1,6 @@
+There are several tables in a Clickhouse database, their descriptions:
+[tables]
+
+Your task is build a SQL for the following natural language query:
+"[query]"
+Answer with SQL only, no explanation is needed
