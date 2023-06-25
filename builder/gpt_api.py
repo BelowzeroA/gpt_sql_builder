@@ -47,6 +47,7 @@ class GPTApi:
                 # time.sleep(1)
             except Exception as e:
                 count += 1
+                raise e
                 print(e)
 
         if not success:
