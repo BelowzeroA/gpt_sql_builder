@@ -10,4 +10,5 @@ Which returned the following result:
 ---
 [query_result]
 ---
+Note: if the query result is nan it means that the result is empty. Empty result means no data in the database matches the query.
 Answer to the natural language query considering the result of the SQL query:
