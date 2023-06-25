@@ -1,7 +1,9 @@
+import os
+
 from builder.pipeline import SQLBuilderPipeline
 
-OPENAI_API_KEY = "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"
-CLICKHOUSE_PASSWORD = "4a_v433uwivSV"
+OPENAI_API_KEY = os.environ['OPENAI_API_KEY']
+CLICKHOUSE_PASSWORD = os.environ['CLICKHOUSE_PASSWORD']
 
 
 pipeline = SQLBuilderPipeline(
@@ -12,9 +14,9 @@ pipeline = SQLBuilderPipeline(
 
 def main():
     # query = "When did we get the maximum of daily visits on the website in 2023?"
-    # query = "When did we get the maximum of daily visits on the website in 2023?"
-    query = "What was the average CPC in Google Ads in May 2023?"
-    query = "Which platform had the highest CPC in 2023: Google or Bing?"
+    query = "When did we get the maximum of daily visits on the website in 2023?"
+    # query = "What was the average CPC in Google Ads in May 2023?"
+    # query = "Which platform had the highest CPC in 2023: Google or Bing?"
     sql = pipeline.run(query)
     print(sql)
 

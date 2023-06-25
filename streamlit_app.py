@@ -20,7 +20,7 @@ st.write("Welcome to the GPT SQL Builder. This assistant will help you create SQ
 # Replace the print and input statements with Streamlit functions
 st.write("Type your query and press the button to get the SQL.")
 query = st.text_input("Query:")
-generate_button = st.button("Generate SQL")
+generate_button = st.button("Generate SQL and get result")
 placeholder_sql = st.empty()
 placeholder_data = st.empty()
 

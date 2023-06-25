@@ -1,0 +1,8 @@
+There are several tables in a Clickhouse database, their descriptions:
+[tables]
+
+Your task is build a SQL for the following natural language query:
+"[query]"
+First step is to select a main table to query from. Please, select one of the tables below.
+Answer with the following format:
+Table name: [table_name]

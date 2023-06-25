@@ -105,3 +105,10 @@ class GPTPromptManager:
     @staticmethod
     def _parse_response_describe_result(response: str) -> Any:
         return response.strip()
+
+    @staticmethod
+    def _parse_response_select_table(response: str) -> Any:
+        parts = response.split(":")
+        if len(parts) != 2:
+            raise ValueError("Wrong response format")
+        return parts[1].strip()

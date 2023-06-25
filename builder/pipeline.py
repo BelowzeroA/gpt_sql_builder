@@ -6,6 +6,7 @@ from builder.gpt_api import GPTApi
 from builder.gpt_prompt_manager import GPTPromptManager
 
 OPERATION_BUILD_SQL = "build_sql"
+OPERATION_SELECT_TABLE = "select_table"
 OPERATION_DESCRIBE_RESULT = "describe_result"
 
 
@@ -18,6 +19,27 @@ class SQLBuilderPipeline:
         self.prompt_manager = GPTPromptManager()
         self.db_plugin = ClickhouseConnector(clickhouse_password)
 
+    def select_table(self, query: str, tables: list) -> str:
+        params = {"query": query, "tables": tables}
+        system_prompt, prompt = self.prompt_manager.get_prompt(
+            OPERATION_SELECT_TABLE,
+            parameters=params
+        )
+        response = self.api.generate(
+            system_prompt,
+            prompt,
+            model="gpt-3.5-turbo",
+            # model="gpt-4",
+            max_tokens=20
+        )
+
+        table = self.prompt_manager.parse_response(
+            OPERATION_SELECT_TABLE,
+            response=response
+        )
+
+        return table
+
     def build_sql(self, query: str, tables: list) -> str:
         params = {"query": query, "tables": tables}
         system_prompt, prompt = self.prompt_manager.get_prompt(
@@ -29,7 +51,7 @@ class SQLBuilderPipeline:
             prompt,
             # model="gpt-3.5-turbo",
             model="gpt-4",
-            max_tokens=100
+            max_tokens=150
         )
 
         sql = self.prompt_manager.parse_response(
@@ -63,9 +85,10 @@ class SQLBuilderPipeline:
     def run(self, query: str) -> str:
         result = {}
         table_descriptions = self.db_plugin.get_table_descriptions()
+        # main_table = self.select_table(query, table_descriptions)
         sql = self.build_sql(query, table_descriptions)
         result["sql"] = sql
-        query_result = self.db_plugin.command(result["sql"])
+        query_result = self.db_plugin.command(sql)
         result["data"] = query_result
         result["description"] = self.describe_result(query, sql, query_result)
         return result
