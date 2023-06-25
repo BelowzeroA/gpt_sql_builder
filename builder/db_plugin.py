@@ -7,7 +7,7 @@ USER = 'default'
 
 
 class ClickhouseConnector:
-
+    """Class for connecting to Clickhouse database"""
     def __init__(self, password: str):
         self.client = clickhouse_connect.get_client(
             host=DB_HOST,

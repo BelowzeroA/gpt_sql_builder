@@ -20,6 +20,7 @@ class SQLBuilderPipeline:
         self.db_plugin = ClickhouseConnector(clickhouse_password)
 
     def select_table(self, query: str, tables: list) -> str:
+        """Selects the table from the list of tables that matches the query"""
         params = {"query": query, "tables": tables}
         system_prompt, prompt = self.prompt_manager.get_prompt(
             OPERATION_SELECT_TABLE,
@@ -41,6 +42,7 @@ class SQLBuilderPipeline:
         return table
 
     def build_sql(self, query: str, tables: list) -> str:
+        """Builds SQL query from the natural language query"""
         params = {"query": query, "tables": tables}
         system_prompt, prompt = self.prompt_manager.get_prompt(
             OPERATION_BUILD_SQL,
@@ -62,6 +64,7 @@ class SQLBuilderPipeline:
         return sql
 
     def describe_result(self, query: str, sql: str, query_result: Any) -> str:
+        """Generates a description of the query result"""
         params = {"query": query, "query_result": query_result, "sql": sql}
         system_prompt, prompt = self.prompt_manager.get_prompt(
             OPERATION_DESCRIBE_RESULT,
@@ -83,6 +86,7 @@ class SQLBuilderPipeline:
         return description
 
     def run(self, query: str) -> str:
+        """Main pipeline method that orchestrates the query processing"""
         result = {}
         table_descriptions = self.db_plugin.get_table_descriptions()
         # main_table = self.select_table(query, table_descriptions)

@@ -1,6 +1,6 @@
 import json
 import os
-from typing import List, Any
+from typing import Any
 
 from builder.file_utils import load_list_from_file
 
@@ -9,7 +9,7 @@ master_prompt = load_list_from_file(os.path.join(PROMPTS_DIR, "master_prompt.txt
 
 
 class GPTPromptManager:
-
+    """Helper class to manage GPT prompts and processes GPT responses"""
     def __init__(self):
         self.prompts = self._load_prompts()
 
@@ -54,31 +54,7 @@ class GPTPromptManager:
         return self.compose_prompt(state, parameters)
 
     @staticmethod
-    def _coerce_text(text: str, max_length) -> str:
-        if not text:
-            return ""
-        text = text.replace("\n", " ")
-        if len(text) > max_length:
-            text = text[:max_length] + "..."
-        return text
-
-    @staticmethod
-    def extract_numbers(text: str) -> int:
-        digits_started = False
-        digits = []
-        for char in text:
-            if char.isdigit():
-                digits_started = True
-                digits.append(char)
-            elif digits_started:
-                break
-
-        if len(digits) > 0:
-            return int("".join(digits))
-
-        return None
-
-    def _format_parameter_tables(self, tables: list) -> str:
+    def _format_parameter_tables(tables: list) -> str:
         result = []
         for table in tables:
             result.append(f"Table '{table['name']}':")

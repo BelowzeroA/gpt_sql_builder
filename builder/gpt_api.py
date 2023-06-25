@@ -11,7 +11,7 @@ CHARS_PER_TOKEN = 3.4
 
 class GPTApi:
     """
-    Wrapper around OpenAI GPT-4 API
+    A wrapper around OpenAI GPT-family API
     """
     def __init__(self, open_ai_api_key: str):
         openai.api_key = open_ai_api_key
