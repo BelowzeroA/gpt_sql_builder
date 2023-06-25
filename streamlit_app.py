@@ -9,8 +9,8 @@ pipeline = SQLBuilderPipeline(OPENAI_API_KEY, CLICKHOUSE_PASSWORD)
 
 def generate(query, placeholder_sql, placeholder_data):
     result = pipeline.run(query)
-    placeholder_sql.markdown(result["sql"], unsafe_allow_html=True)
-    placeholder_data.markdown(result["description"], unsafe_allow_html=True)
+    placeholder_sql.markdown(f'SQL: {result["sql"]}', unsafe_allow_html=True)
+    placeholder_data.markdown(f'Result: {result["description"]}', unsafe_allow_html=True)
 
 
 # Streamlit app
